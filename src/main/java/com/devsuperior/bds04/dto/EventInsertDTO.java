@@ -8,10 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class EventInsertDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class EventInsertDTO{
 
-	private Long id;
 	@NotBlank(message = "Campo requerido")
 	private String name;
 	@FutureOrPresent(message = "A data do evento não pode ser passada")
@@ -20,8 +18,9 @@ public class EventInsertDTO implements Serializable {
 	@NotNull(message="Campo requerido")
 	private Long cityId;
 
-	public EventInsertDTO(Long id, String name, LocalDate date, String url, Long cityId) {
-		this.id = id;
+	public EventInsertDTO() {}
+
+	public EventInsertDTO(String name, LocalDate date, String url, Long cityId) {
 		this.name = name;
 		this.date = date;
 		this.url = url;
@@ -29,15 +28,10 @@ public class EventInsertDTO implements Serializable {
 	}
 
 	public EventInsertDTO(Event entity) {
-		id = entity.getId();
 		name = entity.getName();
 		date = entity.getDate();
 		url = entity.getUrl();
 		cityId = entity.getCity().getId();
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public String getName() {
