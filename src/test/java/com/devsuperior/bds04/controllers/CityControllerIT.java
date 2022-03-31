@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.devsuperior.bds04.dto.CityInsertDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class CityControllerIT {
 	@Test
 	public void insertShouldReturn401WhenNoUserLogged() throws Exception {
 
-		CityDTO dto = new CityDTO(null, "Recife");
+		CityInsertDTO dto = new CityInsertDTO( "Recife");
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
@@ -67,7 +68,7 @@ public class CityControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, clientUsername, clientPassword);
 
-		CityDTO dto = new CityDTO(null, "Recife");
+		CityInsertDTO dto = new CityInsertDTO("Recife");
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
@@ -85,7 +86,7 @@ public class CityControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-		CityDTO dto = new CityDTO(null, "Recife");
+		CityInsertDTO dto = new CityInsertDTO("Recife");
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
@@ -105,7 +106,7 @@ public class CityControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-		CityDTO dto = new CityDTO(null, "    ");
+		CityInsertDTO dto = new CityInsertDTO("    ");
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
